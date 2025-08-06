@@ -11,48 +11,43 @@ using namespace std;
 void faltu () {            cerr << endl;}
 template < typename T, typename ... hello>void faltu( T arg, const hello &... rest) {cerr << arg << ' ';faltu(rest...);}
 
+string s;
 
-int revNum(int n){
-    
-    optimize();
+bool checkPalindrome(int l,int r){
 
-    int res = 0;
-    while (n>0)
-    {
-        /* code */
-        res*=10;
-        // cout<<res<<" ";
-        // dbg(res);
-        res+=(n%10);
-        // cout<<res<<" ";
-        n/=10;
-        // cout<<n<<" ";
+    while(l<r){
+        if(s[l]!=s[r]){
+           return 0;
+        }
+
+        l++;r--;
     }
-    // cout<<endl;
-    return res;
+
+    return 1;
 }
 
 
 
 int main(){
+    optimize();
+
     ios::sync_with_stdio(false);
     cin.tie(NULL);
     
-    int t;
-    cin>>t;
-    while (t--)
-    {
-        /* code */
-        int a,b; cin>>a>>b;
+    
+    cin>>s;
 
-        int ra = revNum(a);
-        int rb = revNum(b);
+    int ans=1;
 
-        int revS = ra+rb;
-        int revSum = revNum(revS);
+    for(int i=0;i<s.length();i++){
+        for(int j=i+1;j<s.length();j++){
 
-        cout<<revSum<<endl;
+            if(checkPalindrome(i,j)==1) ans=max(ans, j-i+1);
+
+        }
     }
+
+    cout<<ans<<endl;
     
     return 0;
 }
